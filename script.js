@@ -28,14 +28,20 @@ listContainer.addEventListener("click", function(e){
 }, false);
 
 
+function updateCounter(){
+    const total = listContainer.querySelectorAll("li").length;
+    const done  = listContainer.querySelectorAll("li.checked").length;
+    document.getElementById("counter").textContent = done + "/" + total;
+}
 function saveData(){
-    localStorage.setItem("data",listContainer.innerHTML); 
+    localStorage.setItem("data", listContainer.innerHTML);
+    updateCounter();
 }
 function showTask(){
-    listContainer.innerHTML=localStorage.getItem("data");
+    listContainer.innerHTML = localStorage.getItem("data") || "";
+    updateCounter();
 }
 showTask();
-
 
 const allUl = document.querySelectorAll('#list-container');
 const searchInput = document.querySelector('#searchid');
