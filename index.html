@@ -10,26 +10,28 @@
     <div class="container">
         <div class="todo-app">
             <h2>TO-DO LIST <img src="images/icon.png"> </h2>
-            <div class="score">
-                <div class="stats-num">
-                    <p id="counter">0/0</p>
+            <div class="top-bar">
+                <div class="score">
+                    <div class="stats-num">
+                        <p id="counter">0/0</p>
+                    </div>
+                </div>
+                <div class="search">
+                    <input type="text" placeholder="Search your Task" id="searchid">
                 </div>
             </div>
-        <div class="row">
-            <input type="text" id="input-box" placeholder="Enter your Task">
-            <button onclick="addTask()">Add</button>
+            <div class="row">
+                <input type="text" id="input-box" placeholder="Enter your Task">
+                <button onclick="addTask()">Add</button>
+            </div>
+            <div class="toolbar">
+                <button id="clear-done" type="button">Clear completed</button>
+                <button id="clear-all" type="button">Clear all</button>
+            </div>
+            <ul id="list-container">
+            </ul>
         </div>
-        <ul id="list-container">
-           
-        </ul>
-        <div class="search">
-            <input type="text"  placeholder="Search your Task" id="searchid">
-        </div>
-            
-        </div>
-            
-        </div>
-        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

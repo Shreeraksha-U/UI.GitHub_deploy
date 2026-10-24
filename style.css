@@ -39,7 +39,7 @@ box-sizing: border-box;
     box-shadow: 8px 5px 10px #a3b1c6, 
     -8px -8px 10px #ffffff;    
     border-radius: 15px;
-    transform: translateX(10px) translateY(-15px); /* Move 10px to the right */
+    flex-shrink: 0;
 }
 .stats-num{
     font-size: 3rem;
@@ -128,11 +128,64 @@ ul li span:hover{
     border-radius: 30px;
 }
 
+.top-bar{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+}
 .search {
-    margin-top: -440px; 
-    margin-left: 330px;
     border-radius: 20px;
     background: #cfcfc7;
-    width:250px; 
-    padding: 10px;  
+    width: 250px;
+    max-width: 100%;
+    padding: 10px;
+}
+
+/* Clear buttons */
+.toolbar{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.toolbar button{
+    padding: 8px 20px;
+    font-size: 14px;
+}
+button:disabled{
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+button:disabled:hover{
+    background: #ff5945;
+}
+
+/* Edit button (pencil icon) next to the x */
+ul li span.edit{
+    right: 40px;
+    background-image: url(images/edit.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 18px;
+    opacity: 0.6;
+}
+ul li span.edit:hover{
+    opacity: 1;
+}
+
+/* Inline editing */
+ul li.editing{
+    cursor: default;
+}
+ul li input.edit-input{
+    width: 100%;
+    font-size: large;
+    background: #ededed;
+    border-radius: 20px;
+    user-select: text;
+}
+ul li input.edit-input.invalid{
+    outline: 2px solid #ff5945;
 }
