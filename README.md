@@ -1,5 +1,3 @@
 Simple To-Do List 
-
-Add, Delete and CSS learnings.
-
-GitHub live deployment testing/demo.
+HTML, CSS, JavaScript
+GitHub live deployment at Pages.
