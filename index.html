@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>Task Manager</title>
+    <script>
+        /* Apply the saved theme before the page paints, so it doesn't flash light first */
+        (function(){
+            var theme = null;
+            try { theme = localStorage.getItem("theme"); } catch (e) {}
+            if(!theme){
+                theme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-theme", theme);
+        })();
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body> 
+<body>
     <div class="container">
         <div class="todo-app">
-            <h2>TO-DO LIST <img src="images/icon.png"> </h2>
+            <div class="header">
+                <h2>Task Manager <img src="images/icon.png" alt=""></h2>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+            </div>
+
             <div class="top-bar">
                 <div class="score">
                     <div class="stats-num">
@@ -17,19 +32,45 @@
                     </div>
                 </div>
                 <div class="search">
-                    <input type="text" placeholder="Search your Task" id="searchid">
+                    <input type="text" placeholder="Search your Task" id="searchid" aria-label="Search tasks">
                 </div>
             </div>
+
+            <div class="progress-wrap">
+                <div class="progress" role="progressbar" aria-label="Tasks completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <p class="progress-label" id="progress-label">0% complete</p>
+            </div>
+
             <div class="row">
-                <input type="text" id="input-box" placeholder="Enter your Task">
-                <button onclick="addTask()">Add</button>
+                <input type="text" id="input-box" placeholder="Enter your Task" aria-label="New task">
+                <button id="add-btn" type="button">Add</button>
             </div>
-            <div class="toolbar">
-                <button id="clear-done" type="button">Clear completed</button>
-                <button id="clear-all" type="button">Clear all</button>
+            <div class="options">
+                <label>Due date <input type="date" id="due-date"></label>
+                <label>Priority
+                    <select id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </label>
             </div>
-            <ul id="list-container">
-            </ul>
+
+            <div class="controls">
+                <div class="filters" role="group" aria-label="Filter tasks">
+                    <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+                    <button type="button" class="filter-btn" data-filter="active" aria-pressed="false">Active</button>
+                    <button type="button" class="filter-btn" data-filter="completed" aria-pressed="false">Completed</button>
+                </div>
+                <div class="clear-actions">
+                    <button id="clear-done" type="button">Clear completed</button>
+                    <button id="clear-all" type="button">Clear all</button>
+                </div>
+            </div>
+
+            <ul id="list-container"></ul>
         </div>
     </div>
     <script src="script.js"></script>
