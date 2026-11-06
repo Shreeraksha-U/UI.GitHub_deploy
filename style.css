@@ -1,3 +1,53 @@
+/* ---------- Colors (light + dark) ---------- */
+:root{
+    color-scheme: light;
+    --bg-1: #178921;
+    --bg-2: #4e085f;
+    --card: #fff;
+    --text: #111;
+    --heading: #002765;
+    --muted: #555;
+    --field: #ededed;
+    --search: #cfcfc7;
+    --score-bg: #e0e5ec;
+    --shadow-dark: #a3b1c6;
+    --shadow-light: #fff;
+    --stat: rgb(0, 0, 168);
+    --accent: #ff5945;
+    --accent-hover: rgb(17, 190, 17);
+    --hover: #edeef0;
+    --track: #dcdcdc;
+    --fill: #178921;
+    --high-bg: #fde2df;   --high-text: #a3180c;
+    --medium-bg: #fdf0cf; --medium-text: #7a5200;
+    --low-bg: #dff3e1;    --low-text: #1b6b27;
+    --overdue: #c0281a;
+    --today: #8a5a00;
+}
+:root[data-theme="dark"]{
+    color-scheme: dark;
+    --bg-1: #0c3d12;
+    --bg-2: #25042e;
+    --card: #1e2230;
+    --text: #e6e9f2;
+    --heading: #9db8ff;
+    --muted: #9aa3b8;
+    --field: #2b3042;
+    --search: #2b3042;
+    --score-bg: #262b3b;
+    --shadow-dark: #151824;
+    --shadow-light: #343b54;
+    --stat: #8fa8ff;
+    --hover: #2f3550;
+    --track: #33394f;
+    --fill: #3fbf4f;
+    --high-bg: #4a2420;   --high-text: #ffb4aa;
+    --medium-bg: #473a17; --medium-text: #f5d27a;
+    --low-bg: #1f3d25;    --low-text: #9ce0a8;
+    --overdue: #ff8a7d;
+    --today: #f5d27a;
+}
+
 /*Applicable css for entire file*/
 *{
 margin: 0;
@@ -9,80 +59,230 @@ box-sizing: border-box;
 .container{
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(135deg, #178921, #4e085f);
+    background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
     padding: 10px;
 }
 .todo-app{
     width: 100%;
     max-width: 640px;
-    background: #fff;
+    background: var(--card);
+    color: var(--text);
     margin: 100px auto 20px;
-    padding: 40px 30px 70px;
+    padding: 40px 30px 50px;
     border-radius: 10px;
-    height: 500px;     /* Fixed height and width (is needed to add scroll) that might cause overflow */
-    overflow-y: auto; /* overflow enables to add scroll use webkit scroll*/
+}
+.header{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
 }
 .todo-app h2{
-    color: #002765;
+    color: var(--heading);
     display: inline-flex;
     align-items: center;
     margin-bottom: 20px;
-} 
+}
 .todo-app h2 img{
     width: 30px;
     margin-left:10px;
 }
+
+/* ---------- Counter, search, progress ---------- */
+.top-bar{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
 .score{
     width: 150px;
     height: 60px;
-    background-color: #e0e5ec;
-    box-shadow: 8px 5px 10px #a3b1c6, 
-    -8px -8px 10px #ffffff;    
+    background-color: var(--score-bg);
+    box-shadow: 8px 5px 10px var(--shadow-dark),
+    -8px -8px 10px var(--shadow-light);
     border-radius: 15px;
     flex-shrink: 0;
 }
 .stats-num{
     font-size: 3rem;
     margin-left: 45px;
-    color:rgb(0, 0, 168);
+    color: var(--stat);
 }
+.search {
+    border-radius: 20px;
+    background: var(--search);
+    width: 250px;
+    max-width: 100%;
+    padding: 10px;
+}
+.search input{
+    width: 100%;
+}
+.progress-wrap{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+.progress{
+    flex: 1;
+    height: 10px;
+    background: var(--track);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progress-fill{
+    height: 100%;
+    width: 0;
+    background: var(--fill);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+.progress-label{
+    font-size: 14px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+/* ---------- Add task ---------- */
 .row{
     display: flex ;
     align-items: center;
     justify-content: space-between;
-    background: #ededed;
+    background: var(--field);
     border-radius: 30px;
     padding-left: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 12px;
 }
-
+.row:focus-within{
+    box-shadow: 0 0 0 2px var(--stat);
+}
 input{
     flex: 1;
     border: none;
     outline: none;
     background: transparent;
     padding: 10px; 
+    color: var(--text);
+}
+input::placeholder{
+    color: var(--muted);
 }
 button{
     border: none;
     outline: none;
     padding: 16px 50px;
-    background: #ff5945;
+    background: var(--accent);
     color: #f1e3e3;
     font-size: 16px;
     cursor: pointer;
     border-radius: 40px;
 }  
-  button:hover{background:rgb(17, 190, 17);}
+button:hover{background: var(--accent-hover);}
+button:focus-visible,
+select:focus-visible,
+input[type="date"]:focus-visible,
+.search input:focus-visible,
+li:focus-visible{
+    outline: 2px solid var(--stat);
+    outline-offset: 2px;
+}
+button:disabled{
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+button:disabled:hover{
+    background: var(--accent);
+}
 
+.options{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+.options label{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--muted);
+}
+.options input[type="date"],
+.options select,
+.edit-row input[type="date"],
+.edit-row select{
+    flex: none;
+    background: var(--field);
+    color: var(--text);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+/* ---------- Theme toggle ---------- */
+.theme-toggle{
+    padding: 8px 16px;
+    font-size: 14px;
+    background: var(--field);
+    color: var(--text);
+}
+.theme-toggle:hover{
+    background: var(--hover);
+}
+
+/* ---------- Filters + clear buttons ---------- */
+.controls{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.filters,
+.clear-actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.filter-btn,
+.clear-actions button{
+    padding: 8px 16px;
+    font-size: 14px;
+}
+.filter-btn{
+    background: var(--field);
+    color: var(--text);
+}
+.filter-btn:hover{
+    background: var(--hover);
+}
+.filter-btn[aria-pressed="true"],
+.filter-btn[aria-pressed="true"]:hover{
+    background: var(--accent);
+    color: #fff;
+}
+
+/* ---------- Task list ---------- */
 ul li{
     list-style: none;
-    font-size: large;
-    padding: 12px 45px 12px 50px;
-    user-select: all;
-    cursor: pointer;
     position: relative;
-    word-wrap: break-word; /*adjustes word within space provided*/
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 6px 10px 50px;
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+ul li:not(.editing):not(.empty):hover{
+    background: var(--hover);
 }
 ul li::before{
     content: '';
@@ -93,99 +293,168 @@ ul li::before{
     background-image: url(images/unchecked.png);
     background-size: cover;
     background-position: center;
-    top: 8px;
+    top: 50%;
     left: 8px;
+    transform: translateY(-50%);
 }
-ul li.checked{
-    color: #555;
-    text-decoration:line-through;
+:root[data-theme="dark"] ul li:not(.checked)::before{
+    filter: invert(1);   /* the circle icon is black, so flip it to white on dark */
 }
 ul li.checked::before{
     background-image: url(images/checked.png);
-
 }
-/* ul li edit{} */
-ul li span{
-    position: absolute;
-    right: 0;
-    top: 5px;
-    width: 40px;
-    height: 40px; 
-    font-size: 22px;
-    color:#555;
-    line-height:40px;
-    text-align: center;
-    border-radius: 50%;
+ul li.empty{
+    justify-content: center;
+    padding: 30px 10px;
+    color: var(--muted);
+    cursor: default;
 }
-ul li span:hover{
-    background:#edeef0;
-}
-.todo-app::-webkit-scrollbar{
-    width: 8px;
-}
-.todo-app::-webkit-scrollbar-thumb{
-    background: #ff5945;
-    border-radius: 30px;
+ul li.empty::before{
+    display: none;
 }
 
-.top-bar{
+.task-body{
+    flex: 1;
+    min-width: 0;
+}
+.task-text{
+    font-size: large;
+    word-wrap: break-word; /*adjustes word within space provided*/
+    overflow-wrap: anywhere;
+}
+ul li.checked .task-text{
+    color: var(--muted);
+    text-decoration: line-through;
+}
+.task-meta{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 25px;
+    gap: 4px 10px;
+    margin-top: 4px;
+    font-size: 13px;
 }
-.search {
-    border-radius: 20px;
-    background: #cfcfc7;
-    width: 250px;
-    max-width: 100%;
-    padding: 10px;
+.badge{
+    padding: 2px 10px;
+    border-radius: 999px;
+}
+.badge-high{ background: var(--high-bg); color: var(--high-text); }
+.badge-medium{ background: var(--medium-bg); color: var(--medium-text); }
+.badge-low{ background: var(--low-bg); color: var(--low-text); }
+.due{
+    color: var(--muted);
+}
+.due.overdue{
+    color: var(--overdue);
+    font-weight: bold;
+}
+.due.today{
+    color: var(--today);
+    font-weight: bold;
 }
 
-/* Clear buttons */
-.toolbar{
+.task-actions{
     display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
+    flex-shrink: 0;
 }
-.toolbar button{
-    padding: 8px 20px;
-    font-size: 14px;
+.icon-btn{
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 22px;
+    line-height: 1;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
-button:disabled{
-    opacity: 0.45;
-    cursor: not-allowed;
+.icon-btn:hover{
+    background: var(--hover);
+    color: var(--text);
 }
-button:disabled:hover{
-    background: #ff5945;
+ul li:hover .icon-btn:hover{
+    background: var(--card);
 }
-
-/* Edit button (pencil icon) next to the x */
-ul li span.edit{
-    right: 40px;
-    background-image: url(images/edit.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 18px;
+.edit-btn::before{
+    content: "";
+    width: 18px;
+    height: 18px;
+    background: url(images/edit.png) center / contain no-repeat;
     opacity: 0.6;
 }
-ul li span.edit:hover{
+.edit-btn:hover::before{
     opacity: 1;
 }
+:root[data-theme="dark"] .edit-btn::before{
+    filter: invert(1);   /* the pencil icon is black, so flip it to white on dark */
+}
 
-/* Inline editing */
+/*  Inline editing */
 ul li.editing{
     cursor: default;
-}
-ul li input.edit-input{
-    width: 100%;
-    font-size: large;
-    background: #ededed;
-    border-radius: 20px;
+    align-items: flex-start;
     user-select: text;
 }
-ul li input.edit-input.invalid{
-    outline: 2px solid #ff5945;
+.edit-form{
+    flex: 1;
+    min-width: 0;
+}
+.edit-input{
+    width: 100%;
+    font-size: large;
+    background: var(--field);
+    border-radius: 20px;
+    padding: 10px 14px;
+}
+.edit-input:focus-visible{
+    outline: 2px solid var(--stat);
+}
+.edit-input.invalid,
+.edit-input.invalid:focus-visible{
+    outline: 2px solid var(--accent);
+}
+.edit-row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+.mini{
+    padding: 8px 16px;
+    font-size: 14px;
+}
+.mini.cancel{
+    background: var(--field);
+    color: var(--text);
+}
+.mini.cancel:hover{
+    background: var(--hover);
+}
+.edit-error{
+    min-height: 0;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--overdue);
+}
+
+@media (max-width: 520px){
+    .todo-app{
+        margin-top: 30px;
+        padding: 24px 14px 30px;
+    }
+    .search{
+        width: 100%;
+    }
+}
+@media (prefers-reduced-motion: reduce){
+    .progress-fill{
+        transition: none;
+    }
+}
+
+.edit-error:empty{
+    display: none;
 }
