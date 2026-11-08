@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
+    <title>To-Do List</title>
     <script>
         /* Apply the saved theme before the page paints, so it doesn't flash light first */
         (function(){
@@ -21,7 +21,7 @@
     <div class="container">
         <div class="todo-app">
             <div class="header">
-                <h2>Task Manager <img src="images/icon.png" alt=""></h2>
+                <h2>TO-DO LIST <img src="images/icon.png" alt=""></h2>
                 <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
             </div>
 
@@ -71,6 +71,15 @@
             </div>
 
             <ul id="list-container"></ul>
+            <p class="hint" id="reorder-hint" hidden>Tip: drag tasks to reorder them. On a keyboard, focus a task and press Alt + Up or Down.</p>
+            <p class="sr-only" id="live-region" aria-live="polite"></p>
+        </div>
+    </div>
+    <div class="toast-region" role="status" aria-live="polite">
+        <div class="toast" id="toast" hidden>
+            <span id="toast-message"></span>
+            <button type="button" id="toast-undo" class="toast-undo">Undo</button>
+            <button type="button" id="toast-close" class="toast-close" aria-label="Dismiss" title="Dismiss">×</button>
         </div>
     </div>
     <script src="script.js"></script>
